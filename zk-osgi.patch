@@ -1,0 +1,94 @@
+diff --git a/bin/zjavassist b/bin/zjavassist
+index 99e0c5378c..6979806ced 100755
+--- a/bin/zjavassist
++++ b/bin/zjavassist
+@@ -28,6 +28,6 @@ sed -i "s/^Bundle-SymbolicName:.*/Bundle-SymbolicName: zjavassist/g" MANIFEST.MF
+ sed -i "s/^Bundle-Description:.*/Bundle-Description: zjavassist, wraps Javassist (JAVA programming ASSISTant) and ZK javassist.util.proxy package together, makes Java bytecode manipulation    simple.  It is a class library for editing bytecodes in Java. ZK javassist.util.proxy package is to fix a javassist bug https:\/\/issues.jboss.org\/browse\/JASSIST-247 (during serialization)./" MANIFEST.MF
+ 
+ cd ..
+-zip -r ../../osgi/zjavassist.osgi.jar *
++zip -r ../../osgi/zjavassist.jar *
+ 
+-\rm -r $maindir/dist/lib/ext/javassist
+\ No newline at end of file
++\rm -r $maindir/dist/lib/ext/javassist
+diff --git a/bin/zklessChecker b/bin/zklessChecker
+old mode 100644
+new mode 100755
+diff --git a/build.projects b/build.projects
+index ea0e09ba7d..80d1e27780 100755
+--- a/build.projects
++++ b/build.projects
+@@ -13,6 +13,5 @@ $ZKCML/zuti
+ zkplus
+ zkplus-legacy
+ zksandbox
+-zktest
+ deploy
+-zkwebfragment
+\ No newline at end of file
++zkwebfragment
+diff --git a/build.target.xml b/build.target.xml
+index ebcdc3a934..8ef2db09f9 100755
+--- a/build.target.xml
++++ b/build.target.xml
+@@ -298,10 +298,20 @@ if="deploy.tomcat.required">
+ <target name="build.osgi1" depends="build.jar" if="build.jar.required">
+ 	<mkdir dir="${dist.osgi.dir}"/>
+ 	<echo file="${dist.osgi.dir}/${bnd.config.name}" message="Bundle-Version:${project.version}"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Export-Package:*;-noimport:=true"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Bundle-SymbolicName:${project.name}"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Bundle-Name:${project.name}"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Import-Package:org.zkforge.apache.commons.el.*;resolution:=optional"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message=",javax.portlet.*;resolution:=optional,org.jruby.*;resolution:=optional,org.python.*;resolution:=optional"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message=",org.acegisecurity.*;resolution:=optional,org.hibernate.*;resolution:=optional"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message=",org.seasar.framework.*;resolution:=optional"/>	
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message=",*"/>
++	
+ </target>
+ 
+ <target name="build.osgi2" depends="build.jar2" if="build.jar2.required">
+ 	<echo file="${dist.osgi.dir}/${bnd2.config.name}" message="Bundle-Version:${project.version}"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Export-Package:*;-noimport:=true"/>
+ </target>
+ 
+ <target name="build.osgi3" depends="build.jar" if="build.zweb">
+@@ -318,18 +328,18 @@ if="deploy.tomcat.required">
+ </target>
+ 
+ <target name="build.osgi5" depends="build.jar" if="build.zkex">
+-	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Import-Package:org.zkoss.zk.ui.sys;resolution:=optional,*;resolution:=optional${line.separator}Export-Package:!org.zkoss.zk.ui.sys,*"/>
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Import-Package:org.zkoss.zk.ui.sys;resolution:=optional,*;resolution:=optional"/>
++</target>
++
++<target name="build.osgi.zweb-dsp" depends="build.jar" if="build.zweb-dsp">
++	<echo file="${dist.osgi.dir}/${bnd.config.name}" append="true" message="${line.separator}Fragment-Host:zweb;bundle-version=${project.version}"/>
+ </target>
+ 
+-<target name="build.osgi" depends="build.osgi1, build.osgi2, build.osgi3, build.osgi4, build.osgi5" if="build.jar.required">
++<target name="build.osgi" depends="build.osgi1, build.osgi2, build.osgi3, build.osgi4, build.osgi5, build.osgi.zweb-dsp" if="build.jar.required">
+ 	<taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="${bnd.lib.jar}"/>
+ 	<bndwrap output="${dist.osgi.dir}" definitions="${dist.osgi.dir}">
+ 		<fileset dir="${out.dir}" includes="${jar.name}, ${jar2.name}"/>
+ 	</bndwrap>
+-	<move overwrite="true" todir="${dist.osgi.dir}" >
+-		<fileset dir="${dist.osgi.dir}" includes="${jar.name}, ${jar2.name}" />
+-		<mapper type="glob" from="*.jar" to="*.osgi.jar" /> <!-- aligned with old spec .osgi.jar -->
+-	</move>
+ 	<delete quiet="true">
+ 		<fileset dir="${dist.osgi.dir}" includes="${bnd.config.name}, ${bnd2.config.name}"/>
+ 	</delete>
+diff --git a/build.xml b/build.xml
+index 3a7e3a924a..cff5c779cb 100644
+--- a/build.xml
++++ b/build.xml
+@@ -74,6 +74,9 @@ Copyright (C) 2002 Potix Corporation. All Rights Reserved.
+ 		<condition property="build.zweb">
+ 			<equals arg1="${project.name}" arg2="zweb"/>
+ 		</condition>
++		<condition property="build.zweb-dsp">
++			<equals arg1="${project.name}" arg2="zweb-dsp"/>
++		</condition>
+ 		<condition property="build.zkbind">
+ 			<equals arg1="${project.name}" arg2="zkbind"/>
+ 		</condition>

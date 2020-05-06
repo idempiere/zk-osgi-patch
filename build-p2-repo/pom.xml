@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.idempiere</groupId>
+	<artifactId>zk.to.p2</artifactId>
+	<packaging>pom</packaging>
+	<version>9.0.1</version>
+	
+	<properties>
+		<zk.version>9.0.1</zk.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+		    <id>zk.maven.repo</id>
+		    <url>http://localhost:8081/zk.maven.repo</url>
+		</repository>
+	</repositories>
+		
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.reficio</groupId>
+				<artifactId>p2-maven-plugin</artifactId>
+				<version>1.3.0</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<phase>package</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<configuration>
+							<skipInvalidArtifacts>false</skipInvalidArtifacts>
+  							<skipNotExistingArtifacts>false</skipNotExistingArtifacts>
+
+							<featureDefinitions>
+								<feature>
+									<id>org.idempiere.zk.feature</id>
+									<version>${project.version}</version>
+									<label>iDempiere zk ${project.version} feature</label>
+									<providerName>iDempiere</providerName>
+									<description>zk osgi bundle build from https://github.com/zkoss/zk</description>
+									<copyright>Idempiere</copyright>
+									<license>GPL v2.1</license>
+									<generateSourceFeature>true</generateSourceFeature>
+									<artifacts>
+										<artifact>
+											<id>org.zkoss.zk:zkplus:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zkplus-legacy:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.common:zweb:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.common:zweb-dsp:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zul:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zk:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zhtml:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zkbind:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.common:zel:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.common:zcommon:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zkwebfragment:${zk.version}</id>
+											<source>true</source>
+											<transitive>false</transitive>
+										</artifact>
+										<artifact>
+											<id>org.zkoss.zk:zjavassist:${zk.version}</id>
+											<source>false</source>
+											<transitive>false</transitive>
+										</artifact>
+									</artifacts>
+								</feature>
+							</featureDefinitions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
