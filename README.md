@@ -11,4 +11,4 @@ Usage:
 * at build-maven-repo folder, ./build.sh
 * at build-maven-repo folder, mvn -Djetty.http.port=8081 jetty:run
 * at build-p2-repo, mvn verify
-* to test the generated zk p2 repo, at build-p2-repo, mvn -f pom-jetty-run.xml -Djetty.http.port=8082 jetty:run
+* to test the generated zk p2 repo (http://localhost:8082/zk.p2/), at build-p2-repo, mvn -f pom-jetty-run.xml -Djetty.http.port=8082 jetty:run

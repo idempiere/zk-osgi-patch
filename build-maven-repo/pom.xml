@@ -4,7 +4,7 @@
   <groupId>org.idempiere</groupId>
   <artifactId>zk.maven.repo</artifactId>
   <packaging>war</packaging>
-  <version>9.0.1</version>
+  <version>9.5.0</version>
   <name>Zk Maven Repo</name>
   <url>http://maven.apache.org</url>
   <properties>

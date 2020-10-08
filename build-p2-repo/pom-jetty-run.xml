@@ -4,7 +4,7 @@
   <groupId>org.idempiere</groupId>
   <artifactId>maven.p2</artifactId>
   <packaging>war</packaging>
-  <version>9.0.1</version>
+  <version>9.5.0</version>
   <properties>
         <jettyVersion>9.4.28.v20200408</jettyVersion>
   </properties>
