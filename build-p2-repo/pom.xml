@@ -4,10 +4,10 @@
 	<groupId>org.idempiere</groupId>
 	<artifactId>zk.to.p2</artifactId>
 	<packaging>pom</packaging>
-	<version>9.5.0</version>
+	<version>9.5.0.1</version>
 	
 	<properties>
-		<zk.version>9.5.0</zk.version>
+		<zk.version>9.5.0.1</zk.version>
 	</properties>
 	
 	<repositories>

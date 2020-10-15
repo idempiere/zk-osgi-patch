@@ -4,7 +4,7 @@
   <groupId>org.idempiere</groupId>
   <artifactId>maven.p2</artifactId>
   <packaging>war</packaging>
-  <version>9.5.0</version>
+  <version>9.5.0.1</version>
   <properties>
         <jettyVersion>9.4.28.v20200408</jettyVersion>
   </properties>
@@ -17,7 +17,7 @@
                 <configuration>
 		        <webAppSourceDirectory>${project.basedir}/target/repository</webAppSourceDirectory>
 		        <webApp>
-          			<contextPath>/zk.p2</contextPath>
+          			<contextPath>/p2.zk</contextPath>
           		</webApp>
 		</configuration>
             </plugin>

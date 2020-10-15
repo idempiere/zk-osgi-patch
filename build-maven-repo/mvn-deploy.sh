@@ -1,7 +1,7 @@
 rid=zk.maven.repo
 gid=org.zkoss.zk
 cgid=org.zkoss.common
-version=9.5.0
+version=9.5.0.1
 path=../dist/lib/osgi
 tpath=../dist/lib
 tgid=org.zkoss.theme
