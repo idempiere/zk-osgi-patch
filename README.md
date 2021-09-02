@@ -4,10 +4,13 @@ This repository is to hold patches and scripts to create zk osgi jars for idempi
 Usage:
 * git clone https://github.com/zkoss/zk
 * Create branch for the tags you want to build from. For e.g, for v9.0.1.2, git checkout tags/v9.0.1.2 -b b9.0.1.2
-* Apply zk-osgi.patch, copy build-maven-repo and build-p2-repo to the clone folder
+* Apply zk-osgi.patch, copy build-sources.sh, build-maven-repo and build-p2-repo to the clone folder
 * Change version at build-maven-repo/pom.xml and build-maven-repo/mvn-deploy.sh
 * Change version at build-p2-repo/pom.xml and build-p2-repo/pom-jetty-run.xml
 * at zk source folder, ./build
+* at zk source folder, ./build-sources.sh
+* Perform the manual step for zjavassist-sources.jar noted at the bottom of build-sources.sh
+* Remove local maven cache at ~/.m2/repository/org/zkoss
 * at build-maven-repo folder, ./build.sh
 * at build-maven-repo folder, mvn -Djetty.http.port=8081 jetty:run
 * at build-p2-repo, mvn verify

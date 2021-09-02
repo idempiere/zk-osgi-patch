@@ -1,7 +1,7 @@
 rid=zk.maven.repo
 gid=org.zkoss.zk
 cgid=org.zkoss.common
-version=9.5.0.1
+version=9.6.0
 path=../dist/lib/osgi
 tpath=../dist/lib
 tgid=org.zkoss.theme
@@ -17,7 +17,7 @@ mvn deploy:deploy-file -Dfile=$path/zhtml.osgi.jar -DrepositoryId=$rid -Durl=$1 
 	-Dsources=$path/zhtml-sources.jar -Dversion=$version
 mvn deploy:deploy-file -Dfile=$path/zjavassist.osgi.jar -DrepositoryId=$rid -Durl=$1 \
 	-DgroupId=$gid -DartifactId=zjavassist \
-	-Dversion=$version
+	-Dsources=$path/zjavassist-sources.jar -Dversion=$version
 mvn deploy:deploy-file -Dfile=$path/zk.osgi.jar -DrepositoryId=$rid -Durl=$1 \
 	-DgroupId=$gid -DartifactId=zk \
 	-Dsources=$path/zk-sources.jar -Dversion=$version	
