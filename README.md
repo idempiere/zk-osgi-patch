@@ -21,6 +21,7 @@ Update Target Platform:
 * At binary.file/p2.zk, create a new folder for the new version, for e.g 9.5.0. Copy all files from build-p2-repo/target/repository to the new folder.
 * At binary.file/p2.zk/<new version>, copy index.html from previous version. Change the version number in index.html.
 * Push binary.file changes.
+* Wait for https://idempiere.github.io/binary.file/p2.zk/{zk version}/ (replace {zk version} with the just deployed zk version, for e.g 9.6.4).
 * Update zk.version at org.idempiere.parent/pom.xml
 * Remove all jar files at org.idempiere.zk.extra/lib
 * Update zk library and repository version at org.idempiere.p2.targetplatform/org.idempiere.p2.targetplatform.target
