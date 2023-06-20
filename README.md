@@ -7,7 +7,9 @@ Usage:
 * Apply zk-osgi.patch (git apply zk-osgi.patch), copy build-sources.sh, build-maven-repo and build-p2-repo to the clone folder
 * Change version at build-maven-repo/pom.xml and build-maven-repo/mvn-deploy.sh
 * Change version at build-p2-repo/pom.xml and build-p2-repo/pom-jetty-run.xml
-* at zk source folder, ./build
+* If you have multiple JDK install, set JAVA_HOME to JDK11
+* at zk source folder, ./build clean
+* at zk source folder, ./build build.release
 * at zk source folder, ./build-sources.sh
 * Perform the manual step for zjavassist-sources.jar noted at the bottom of build-sources.sh
 * Remove local maven cache at ~/.m2/repository/org/zkoss
