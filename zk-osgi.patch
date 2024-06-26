@@ -1,13 +1,130 @@
-diff --git a/build.projects b/build.projects
-index 90449227c9..86e8893b67 100755
---- a/build.projects
-+++ b/build.projects
-@@ -14,6 +14,5 @@ $ZKCML/za11y
- zkplus
- zkplus-legacy
- zksandbox
--zktest
- deploy
--zkwebfragment
+diff --git a/build.gradle b/build.gradle
+index 112e5fde67..6d60b8a0d1 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -36,6 +36,7 @@ ext {
+ 			'zcommon'      : "$rootDir/zcommon",
+ 			'zkwebfragment': "$rootDir/zkwebfragment",
+ 			'zul'          : "$rootDir/zul",
++/*
+ 			'za11y'        : "$zkcmlDir/za11y",
+ 			'zkex'         : "$zkcmlDir/zkex",
+ 			'zkmax'        : "$zkcmlDir/zkmax",
+@@ -44,6 +45,7 @@ ext {
+ 			'stateless'       : "$zkcmlDir/stateless",
+ 			'stateless-immutable': "$zkcmlDir/stateless-immutable",
+ 			'client-bind' : "$zkcmlDir/client-bind"
++*/
+ 	]
+ 	zkcmlprojects = [
+ 			'za11y': "$zkcmlDir/za11y",
+@@ -147,6 +149,7 @@ subprojects {
+ 		toolVersion '10.11.0'
+ 	}
+ 
++/*
+ 	task tscheck(type: NpmTask) {
+ 		setOnlyIf { project.ext['gradleFrontendSkip'] == 'false' }
+ 		enabled = project.file("tsconfig.json").exists()
+@@ -170,10 +173,10 @@ subprojects {
+ 		def eslintDir = project.file(".eslintrc.js").exists() ? projectDir : rootDir;
+ 		args =['run', 'lint', '--', "$projectDir/$resources/web/js", "--config=$eslintDir/.eslintrc.js", "--ignore-path=$rootDir/.eslintignore", "--fix"]
+ 	}
+-
++*/
+ 	check {
+-		dependsOn(tscheck)
+-		dependsOn(jscheck)
++//		dependsOn(tscheck)
++//		dependsOn(jscheck)
+ 	}
+ 
+ 	// Compile LESS
+@@ -321,11 +324,13 @@ subprojects {
+ 	}
+ }
+ 
++/*
+ task tscheck(type: NpmTask) {
+ 	setOnlyIf { project.ext['gradleFrontendSkip'] == 'false' }
+ 	args =['run', 'type-check']
+ }
+ check.dependsOn(tscheck)
++*/
+ 
+ // Version Check
+ def fileCheck(file, regex) {
+@@ -389,4 +394,4 @@ task upVer() {
+ 			}
+ 		}
+ 	}
+-}
 \ No newline at end of file
-+zkwebfragment
++}
+diff --git a/settings.gradle b/settings.gradle
+index 30fd5fdb1b..2480db3428 100644
+--- a/settings.gradle
++++ b/settings.gradle
+@@ -12,6 +12,6 @@ include(':zcommon')
+ include(':zkwebfragment')
+ include(':zul')
+ 
+-includeBuild '../zkcml'
++//includeBuild '../zkcml'
+ includeBuild '../zkthemes'
+ includeBuild "$rootDir/zksandbox"
+diff --git a/tsconfig.json b/tsconfig.json
+index f9e0602924..d22fe7d52a 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -30,10 +30,12 @@
+       "zul",
+       "zhtml",
+       "zkbind",
++/*
+       "stateless",
+       "zkmax",
+       "zkex",
+       "client-bind",
++*/
+       "webpack-env"
+     ],
+     "paths": {
+@@ -45,7 +47,9 @@
+       ],
+       "@zhtml/*": [
+         "./zhtml/src/main/resources/web/js/zhtml/*"
+-      ],
++      ]
++/*
++      ,
+       "@stateless/*": [
+         "./stateless/src/main/resources/web/js/stateless/*"
+       ],
+@@ -58,14 +62,18 @@
+       "@client-bind/*": [
+         "../zkcml/client-bind/src/main/resources/web/js/clientbind/*"
+       ]
++*/
+     }
+   },
+   "include": [
+     "zk/src/main/resources/web/js",
+     "zul/src/main/resources/web/js",
+     "zkbind/src/main/resources/web/js",
+-    "zhtml/src/main/resources/web/js",
++    "zhtml/src/main/resources/web/js"
++/*
++    ,
+     "stateless/src/main/resources/web/js"
++*/
+   ],
+   "exclude": [
+     "node_modules",
+@@ -73,4 +81,4 @@
+     "**/build/*",
+     "**/codegen/*"
+   ]
+-}
+\ No newline at end of file
++}

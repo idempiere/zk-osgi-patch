@@ -4,10 +4,10 @@
 	<groupId>org.idempiere</groupId>
 	<artifactId>zk.to.p2</artifactId>
 	<packaging>pom</packaging>
-	<version>9.5.0.1</version>
+	<version>10.0.1</version>
 	
 	<properties>
-		<zk.version>9.5.0.1</zk.version>
+		<zk.version>10.0.1</zk.version>
 	</properties>
 	
 	<repositories>
@@ -47,11 +47,6 @@
 									<artifacts>
 										<artifact>
 											<id>org.zkoss.zk:zkplus:${zk.version}</id>
-											<source>true</source>
-											<transitive>false</transitive>
-										</artifact>
-										<artifact>
-											<id>org.zkoss.zk:zkplus-legacy:${zk.version}</id>
 											<source>true</source>
 											<transitive>false</transitive>
 										</artifact>
@@ -98,11 +93,6 @@
 										<artifact>
 											<id>org.zkoss.zk:zkwebfragment:${zk.version}</id>
 											<source>true</source>
-											<transitive>false</transitive>
-										</artifact>
-										<artifact>
-											<id>org.zkoss.zk:zjavassist:${zk.version}</id>
-											<source>false</source>
 											<transitive>false</transitive>
 										</artifact>
 									</artifacts>
